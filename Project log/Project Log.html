@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Project Log.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="future-botanical-garden-log-%F0%9F%93%92">Future Botanical Garden Log 📒</h1>
+<h2 id="concept">Concept</h2>
+<p>Many artists have their own ways to express their vision of the future, and I am curious of how the botanical garden will look like in a few decades. We need to rethink of our relationship with the nature, build stronger relationships between people and plants. My design gives people the opportunity to experience different botanical gardens and start thinking about how the botanical garden will look like in the future, and the changes that the botanical garden might face with so many problems that may occur in the future. I decided to create an immersive game that would allow everyone to experience different botanical gardens through digital devices. This work consists of six different scenes, which is named Future Botanical Garden. This is de- signed to reflect my own feelings about the future construction of the botanical garden. I want to give my audience an immersive environment where they can get the most au- thentic experience. In the main scene you will see four rooms, where each of them rep- resents a different world. Different characters have different stories. Entering each room will bring you into that specific world.</p>
+<h2 id="project-detail">Project Detail</h2>
+<h3 id="room-1-watering-succulent"><strong>Room 1 Watering Succulent</strong></h3>
+<p><img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/s1_.jpg" alt="web and arduino"></p>
+<pre><code>     Watering Succulent is an e-plant that uses the data received by the sensor to grow. People will spray water on the small plant, then it will start to grow on the screen. De- pending on the humidity, the plant will grow. People feel pleasant when they grow their own plants and see the results. I hope that through this interactive game process and its lovely background music, people will be able to relax in the observatory and get some spiritual healing.
+</code></pre>
+<h3 id="room-2-balloon-cactus"><strong>Room 2 Balloon Cactus</strong></h3>
+<pre><code>    In this world, cactus are like inflatable balloons, and their texture and appearance have changed a lot. The user needs to rescue balloon cactus trapped in the cube and interact with them. In the interaction between the physical part and the screen, the cactus is deformed and has an elastic appearance like a balloon. It is completely different from the cactus that should be touched in utmost careful in real life. This world allows people to discover interesting interactive experiences in the exploration and get close contact with futuristic creatures.
+</code></pre>
+<h3 id="room-3-digital-garden"><strong>Room 3 Digital Garden</strong></h3>
+<pre><code>    This room is a computer art garden, where the flowers are made with code-generated shades and pictures. The world is a maze and the exit will lead people back to the main scene. It is completely different from a real garden. You will see flowers up close in 3D space and instinctively touch the beautiful flowers. The original intention of designing Room 3 is that I want to unleash the limitations of simulated reality and create a virtual world garden, which of course is completely virtualized. I do not want to bring real things in the real world to the screen.
+</code></pre>
+<h3 id="room-4-organ-tree"><strong>Room 4 Organ Tree</strong></h3>
+<pre><code>    There is a towering tree in this room, which cultivates human organs. You can see the square fluid hanging from the tree keeps the organs growing, and the big trees feed and help them grow. They are like the fruits of plants, from bearing fruit to maturity. In the room, human organs and plant organs are closely linked, and can grow together. Eventually, humans will use the matured organs to help those in need of organ transplants. Under the transformation of biotechnology and genetic engineering, big trees have be- come completely different, and they can meet the human needs while growing in a better way.
+</code></pre>
+<h2 id="mindmap">Mindmap</h2>
+<p><img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/截屏2020-11-27 下午9.51.05.png" alt="mindmap"></p>
+<p>Before starting the technical part, I planned and brainstormed the content of my design. I use the mind map to clarify my thoughts. It helped me in describing and analyzing the problems in a comprehensive and systematic way. It was very helpful for me to think deeply and creatively about the problems I am studying. The use of mind maps is help- ful to find the key factors or links to solve the problem. In my project, I used the mind map to plan the game details and the interactive process in advance, while the mind map played a big role in my post-production game.</p>
+<h2 id="tests">Tests</h2>
+<h1 id=""></h1>
+<h3 id="1-unity-get-message">1. Unity get message</h3>
+<p><a href="https://www.youtube.com/watch?v=qY-jzuG2BZ8&amp;list=PLxA0WM1737-uM9Hj68dwO_KDTb6nfkxkQ&amp;index=3">Computer keypress</a></p>
+<h3 id="2-arduino-sensor">2. Arduino sensor</h3>
+<p><a href="https://www.youtube.com/watch?v=979vYHwUANQ&amp;list=PLxA0WM1737-uM9Hj68dwO_KDTb6nfkxkQ&amp;index=5">Test basic Arudino sensors.</a></p>
+<h3 id="3-arduino-button--unity-get-msg">3. Arduino button &amp; Unity get msg</h3>
+<pre><code>    Connect Aruino and Unity to make Unity receive the data of the Arduino component.
+</code></pre>
+<p><a href="https://www.youtube.com/watch?v=f6DqiCOSwk8&list=PLxA0WM1737-uM9Hj68dwO_KDTb6nfkxkQ&index=2"><img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/test/arduino_button.png" 
+alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a></p>
+<h3 id="3-arduino-3-sensors--unity-get-msg">3. Arduino 3 sensors &amp; Unity get msg</h3>
+<pre><code>    Connect three Arduino sensors and let Unity receive their message.
+</code></pre>
+<p><img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/test/3 sensor_circult.png" alt="3 sensors raw"></p>
+<p><img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/test/3 sensor-arduino.png" alt="3 sensors data"></p>
+<p><img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/test/sensor test_unity.png" alt="unity"></p>
+<h3 id="4-unity-character-interaction-test">4. Unity character interaction test</h3>
+<p><a href="https://www.youtube.com/watch?v=fSJbyOaWI8Q&amp;list=PLxA0WM1737-uM9Hj68dwO_KDTb6nfkxkQ&amp;index=1">This is video link</a></p>
+<h3 id="5-humidity-sensor-final-test">5. humidity sensor Final test</h3>
+<p>https://www.youtube.com/watch?v=1qpfsRyY9Tc&amp;list=PLxA0WM1737-uM9Hj68dwO_KDTb6nfkxkQ&amp;index=6</p>
+<h2 id="character-design">Character design</h2>
+<h3 id="1-succulent">1. Succulent</h3>
+<h4 id="protoype-1-hand-made-model"><strong>Protoype 1</strong> Hand made model</h4>
+<p><img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/suc_p1.jpg" alt=""></p>
+<h4 id="protoype-2-hand-made-model"><strong>Protoype 2</strong> Hand made model</h4>
+<p><img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/suc_p2.jpg" alt=""></p>
+<h4 id="prototype-3-heart-jelly-succulent"><strong>Prototype 3</strong> Heart Jelly Succulent</h4>
+<p><img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/character/IMG_4056.JPG" alt="red heart"></p>
+<p>![2](https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/character/</p>
+<p>%E6%88%AA%E5%B1%8F2020-11-28%20%E4%B8%8A%E5%8D%882.02.55.png)
+<img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/character/截屏2020-11-28 上午2.02.32.png" alt="3"></p>
+<h4 id="prototype-4-acne-succulent"><strong>Prototype 4</strong> Acne Succulent</h4>
+<p><img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/character/IMG_4356.JPG" alt="4"></p>
+<p><img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/character/IMG_4379.JPG" alt=""></p>
+<h4 id="prototype-5-final"><strong>Prototype 5</strong> Final</h4>
+<p><img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/character/截屏2020-11-28 上午2.02.02.png" alt="final"></p>
+<h3 id="2-cactus">2. Cactus</h3>
+<h4 id="protoype-1-hand-made-model"><strong>Protoype 1</strong> Hand made model</h4>
+<p><img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/cactus_p1.jpg" alt=""></p>
+<h5 id="prototype-2"><strong>Prototype 2</strong></h5>
+<p><img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/character/截屏2020-11-28 上午2.07.06.png" alt="1"></p>
+<h5 id="prototype-3"><strong>Prototype 3</strong></h5>
+<p><img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/character/截屏2020-11-28 上午2.07.36.png" alt="">
+<img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/character/截屏2020-11-28 上午2.06.35.png" alt=""></p>
+<h4 id="rendergraph"><em>Rendergraph</em></h4>
+<p><img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/character/cactus2.png" alt="render"></p>
+<h3 id="3-digital-garden">3. Digital Garden</h3>
+<h5 id="prototype"><strong>Prototype</strong></h5>
+<p><img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/character/IMG_4017.JPG" alt="digital flower">
+<img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/flower_p1.jpg" alt="">
+<img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/flower_p2.jpg" alt="">
+<img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/flower_p3.jpg" alt="">
+<img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/flower_p4.jpg" alt=""></p>
+<h4 id="many-kinds-of-materials-and-shaders-test"><em>Many kinds of materials and shaders test.</em></h4>
+<p><img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/character/IMG_4253.JPG" alt=""></p>
+<h4 id="maze-prototype-1"><strong>Maze Prototype 1</strong></h4>
+<p><img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/character/截屏2020-11-23 下午3.45.57.png" alt="maze"></p>
+<h4 id="maze-prototype-2"><strong>Maze Prototype 2</strong></h4>
+<h4 id="maze-prototype-3"><strong>Maze Prototype 3</strong></h4>
+<h2 id="4-organ-tree">4. Organ tree</h2>
+<h4 id="prototype-1"><strong>Prototype 1</strong></h4>
+<p><img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/character/IMG_4193.JPG" alt=""></p>
+<h4 id="organ-part-design">organ part design</h4>
+<p><img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/character/IMG_4194.JPG" alt=""></p>
+<h4 id="prototype-1"><strong>Prototype 1</strong></h4>
+<p><img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/character/IMG_4424.JPG" alt=""></p>
+<h4 id="color-choose">Color choose</h4>
+<p><img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/character/IMG_4506.PNG" alt=""></p>
+<h4 id="organ-part-design">organ part design</h4>
+<p><img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/character/IMG_4507.jpg" alt=""></p>
+<h3 id="5-main-scene">5. Main scene</h3>
+<h4 id="building-block">Building block</h4>
+<p><img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/character/截屏2020-11-28 上午2.03.55.png" alt=""></p>
+<h4 id="block-files">Block files</h4>
+<p><img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/character/many fbx files.png" alt=""></p>
+<h2 id="code-part">Code part</h2>
+<h3 id="1-succlent-c-animation-code">1. Succlent c# animation code.</h3>
+<p><img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/arduino_unity_animation_script.png" alt="c# animation code"></p>
+<h3 id="2-cactus-mouse-interaction-code">2. Cactus mouse interaction code.</h3>
+<p><img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/jelly.png" alt="">
+<img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/mouseinput.png" alt="">
+<img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/clickToDestroy.png" alt=""></p>
+<h3 id="3-change-scene-code">3. Change scene code</h3>
+<p><img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/ChangeScene.png" alt="">
+<img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/tigger.png" alt=""></p>
+<h3 id="4-first-personal-player">4. First Personal player</h3>
+<p><img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/F_mouselook.png" alt="">
+<img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/F_playmovement.png" alt=""></p>
+<h2 id="final-scenes">Final Scenes</h2>
+<h4 id="1watering-succluent"><strong>1.Watering succluent</strong></h4>
+<p><img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/Scenes/截屏2020-11-27 下午9.08.38.png" alt=""></p>
+<h4 id="2-ballon-cactus"><strong>2. Ballon Cactus</strong></h4>
+<p><img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/Scenes/截屏2020-11-27 下午9.12.16.png" alt=""></p>
+<h4 id="3-digita-garden"><strong>3. Digita Garden</strong></h4>
+<p><img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/Scenes/截屏2020-11-27 下午9.07.07.png" alt="Digital Garden">
+<img src="https://github.com/Yunhan-Wang/blueginger/raw/maaster/Log_image/Scenes/截屏2020-11-27 下午9.07.41.png" alt=""></p>
+<h4 id="4-organ-tree"><strong>4. Organ Tree</strong></h4>
+<p><img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/Scenes/截屏2020-11-27 下午9.10.59.png" alt=""></p>
+<h4 id="5-enter-scene"><strong>5. Enter Scene</strong></h4>
+<p><img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/enter.png" alt=""></p>
+<h4 id="6-main-scene"><strong>6. Main Scene</strong></h4>
+<p><img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/Scenes/截屏2020-11-27 下午9.10.21.png" alt=""></p>
+<p><img src="https://github.com/Yunhan-Wang/blueginger/raw/master/Log_image/Scenes/截屏2020-11-27 下午9.10.38.png" alt=""></p>
+
+</body>
+</html>
